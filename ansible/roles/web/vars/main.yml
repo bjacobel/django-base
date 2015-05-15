@@ -1,0 +1,32 @@
+---
+
+# Application settings.
+application_log_file: "{{ application_log_dir }}/gunicorn_supervisor.log"
+requirements_file: "{{ project_path }}/reqs/prod.txt"
+
+
+# Gunicorn settings
+gunicorn_user: orient
+gunicorn_group: webapps
+
+
+# Nginx settings
+nginx_http_port: 80
+nginx_https_port: 443
+nginx_access_log_file: "{{ application_log_dir }}/nginx_access.log"
+nginx_error_log_file: "{{ application_log_dir }}/nginx_error.log"
+nginx_static_dir: "{{ application_path }}/static/"
+nginx_media_dir: "{{ application_path }}/media/"
+
+
+# Django Environment variables
+django_environment:
+  DJANGO_SETTINGS_MODULE: "{{ django_settings_file }}"
+  DJANGO_SECRET_KEY: "{{ django_secret_key }}"
+  DATABASE_USER: "{{ db_user }}"
+  DATABASE_PASSWORD: "{{ db_password }}"
+  DATABASE_NAME: "{{ db_name }}"
+  RAVEN_DSN: "{{ raven_dsn }}"
+  SITE_URL: "{{ site_url }}"
+  AWS_ACCESS_KEY_ID: "{{ aws_access_key_id }}"
+  AWS_SECRET_ACCESS_KEY: "{{ aws_secret_access_key }}"

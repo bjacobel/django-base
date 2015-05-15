@@ -1,0 +1,15 @@
+module(load="imfile" PollingInterval="10")
+
+input(type="imfile"
+      File="{{ application_log_dir }}/nginx_access.log"
+      Tag="nginx-access"
+      Severity="info"
+      StateFile="/var/spool/rsyslog/{{application_name}}_nginx_access"
+      Facility="local7")
+
+input(type="imfile"
+      File="{{ application_log_dir }}/nginx_error.log"
+      Tag="nginx-error"
+      Severity="error"
+      StateFile="/var/spool/rsyslog/{{application_name}}_nginx_error"
+      Facility="local7")

@@ -1,0 +1,72 @@
+/* Things that CSS should do/not do by default
+**************************************/
+
+%bsbb {
+    @include vendor-prefix("box-sizing", "border-box");
+}
+
+* {
+    @extend %bsbb;
+}
+
+%lists {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul, ol {
+    @extend %lists;
+}
+
+%noselect {
+    @include vendor-prefix("user-select", "none");
+}
+
+%hand {
+    cursor:pointer;
+}
+
+a {
+    text-decoration:none;
+    color:black;
+}
+
+body {
+    padding:0;
+    margin:0;
+}
+
+input[type=search],
+input[type=text] {
+    @include vendor-prefix("appearance", "none");
+    @include vendor-prefix("border-radius", "4px");
+    @include vendor-prefix("box-shadow", "none");
+    outline: none;
+    border: 1px solid $lightgray;
+
+    &:focus {
+        border: 1px solid rgba($lightblue, 0.8);
+        @include box-shadow(8px, $lightblue, 0.6);
+    }
+}
+
+input[type=submit] {
+    @include vendor-prefix("border-radius", 4px);
+    border: none;
+}
+
+%valign {
+    position: relative;
+    top: 50%;
+    @include vendor-prefix("transform", "translateY(-50%)");
+}
+
+%hyphenate {
+    @include vendor-prefix("word-break", "break-all");
+    word-break: break-word;
+    word-wrap:normal;
+    @include vendor-prefix("hyphens", "auto");
+}
+
+$maxz: 2147483647;

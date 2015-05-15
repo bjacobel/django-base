@@ -1,0 +1,15 @@
+[run]
+source = djangobase
+omit =
+    djangobase/apps/core/migrations/*,
+    djangobase/apps/core/management/*,
+    djangobase/settings/*,
+    *__init__*,
+    *.html
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __str__
+    except ImportError
+    pass

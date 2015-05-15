@@ -1,0 +1,25 @@
+ansible/env_vars/secure.yml
+
+# Pycocide
+*.pyc
+
+# No static files
+djangobase/static/*
+~djangobase/static/bower_components
+
+# No media
+djangobase/media/*
+
+# No logs
+/logs/*
+
+# coveralls
+.coverage
+
+/.tmp
+
+/.sass-cache
+
+*.log
+
+.vagrant/*

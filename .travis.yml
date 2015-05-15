@@ -1,0 +1,27 @@
+language: python
+sudo: false
+python:
+  - "2.7"
+  - "3.4"
+services:
+  - postgresql
+  - memcached
+install:
+  - pip install -r reqs/travis.txt
+cache:
+  directories:
+  - $HOME/.pip-cache/
+  - /home/travis/virtualenv/python2.7.9
+  - /home/travis/virtualenv/python3.4.2
+env:
+  global:
+    - DJANGO_SETTINGS_MODULE="djangobase.settings.travis"
+    - DJANGO_SECRET_KEY="totallynotmyrealsecretkey"
+    - RAVEN_DSN="http://dd2c825ff9b1417d88a99573903ebf80:91631495b10b45f8a1cdbc492088da6a@localhost:9000/1"
+before_script:
+  - psql -c 'create database djangobase_test;' -U postgres
+  - python manage.py syncdb --noinput
+script:
+  - coverage run --source=djangobase manage.py test
+after_success:
+  - coveralls

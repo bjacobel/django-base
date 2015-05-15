@@ -1,0 +1,42 @@
+---
+
+site_url: djangobase.bjacobel.com
+code_source: git
+ssh_user: bjacobel
+
+
+# Gunicorn settings. For the number of workers, a good rule to follow is
+# 2 x number of CPUs + 1
+gunicorn_num_workers: 2
+
+# Setting this to 1 will restart the Gunicorn process each time
+# you make a request, basically reloading the code. Very handy
+# when developing. Set to 0 for unlimited requests (default).
+gunicorn_max_requests: 0
+
+
+# Nginx settings.
+nginx_server_name: "{{ inventory_hostname }}"
+
+
+# Application settings.
+django_settings_file: djangobase.settings.prod
+run_django_collectstatic: yes
+run_django_compress: yes
+setup_etc_hosts: no
+
+
+# Security settings
+fail2ban_ignoreip: 127.0.0.1/8
+fail2ban_bantime: 600
+fail2ban_maxretry: 3
+
+
+# Swap settings
+swapon: true
+swapfile_swappiness: 20
+swapfile_size: 1G
+
+
+# Monitoring settings
+install_newrelic_server: true

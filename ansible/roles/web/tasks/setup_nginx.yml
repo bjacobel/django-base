@@ -1,0 +1,69 @@
+---
+
+- name: Add the Nginx signing key to apt keys
+  apt_key:
+    url: http://nginx.org/keys/nginx_signing.key
+    state: present
+  tags: packages
+
+- name: Add Nginx mainline to sources.list
+  apt_repository:
+    repo: deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx
+    state: present
+  tags: packages
+  register: last_result
+
+- name: Install Nginx mainline
+  apt:
+    update_cache: "{{ 'yes' if last_result.changed else 'no'}}"
+    name: nginx
+    state: latest
+  tags: packages
+
+- name: Copy the SSL certificate to the remote server
+  copy:
+    content: "{{ ssl_crt }}"
+    dest: "{{ ssl_dest_dir }}/{{ application_name }}.crt"
+  notify: restart nginx
+
+- name: Copy the SSL private key to the remote server
+  copy:
+    content: "{{ ssl_key }}"
+    dest: "{{ ssl_dest_dir }}/{{ application_name }}.key"
+  notify: restart nginx
+
+- name: create /etc/nginx/sites-available and etc/nginx/sites-enabled
+  file:
+    name: /etc/nginx/{{ item }}
+    state: directory
+  with_items:
+    - sites-enabled
+    - sites-available
+
+- name: Create the Nginx configuration file
+  template:
+    src: nginx_site_config.j2
+    dest: /etc/nginx/sites-available/{{ application_name }}
+    backup: yes
+  notify: reload nginx
+
+- name: Create the Nginx global configuration file
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    backup: yes
+  notify: reload nginx
+
+- name: Ensure that the default site is disabled
+  command: rm /etc/nginx/sites-enabled/default removes=/etc/nginx/sites-enabled/default
+  notify: reload nginx
+
+- name: Ensure that the application site is enabled
+  command: ln -s /etc/nginx/sites-available/{{ application_name }} /etc/nginx/sites-enabled/{{ application_name }} creates=/etc/nginx/sites-enabled/{{ application_name }}
+  notify: reload nginx
+
+- name: Ensure Nginx service is started
+  service:
+    name: nginx
+    state: started
+    enabled: yes
