@@ -1,5 +1,5 @@
 ###djangobase
-(https://img.shields.io/travis/bjacobel/django-base/develop.svg?style=flat)](https://travis-ci.org/bjacobel/django-base) [![Coverage Status](https://img.shields.io/coveralls/bjacobel/django-base/develop.svg?style=flat)](https://coveralls.io/r/BowdoinOrient/bongo?branch=develop)
+[![Build Status](https://img.shields.io/travis/bjacobel/django-base/develop.svg?style=flat)](https://travis-ci.org/bjacobel/django-base) [![Coverage Status](https://img.shields.io/coveralls/bjacobel/django-base/develop.svg?style=flat)](https://coveralls.io/r/BowdoinOrient/bongo?branch=develop)
 ---
 
 
