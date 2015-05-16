@@ -14,7 +14,9 @@ You'll need:
 
 1. Install system-level dependencies (you may omit some of these, per guidelines above):
 
-        brew install python3 node vagrant
+        brew install python3 node postgresql vagrant
+
+	(I've often had problems with Homebrew's postgres package - [Postgres.app](http://postgresapp.com) can be a good alternative.)
 
 
 2. Run the following commands in psql to set up the Postgres database:
