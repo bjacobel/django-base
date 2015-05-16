@@ -47,7 +47,13 @@ You can run the project's test suite with:
 
         python manage.py test
 
-The test suite currently runs against both Python 2.7 and 3.4.
+To view unit test coverage, install `coverage` (`pip install coverage`), then run:
+
+        coverage run --source=djangobase manage.py test
+
+The project comes with a `.travis.yml` file - if your repository is publicly available on GitHub, [Travis CI](http://travis-ci.org) can be easily configured to run the test suite on git push. Furthermore, [Coveralls.io](http://coveralls.io) can be easily added to this setup as a test coverage reporting tool.
+
+The continuous integration suite is configured to run against both Python 2.7 and 3.4.
 
 ####Deployment
 The code base includes Ansible roles for configuring a Linux server and deploying the project onto it.
