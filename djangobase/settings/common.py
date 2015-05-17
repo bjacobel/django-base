@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 import os
 import sys
+import subprocess
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -186,7 +187,7 @@ BOWER_INSTALLED_APPS = (
     "zepto#1.1.4",
 )
 
-BOWER_PATH = os.path.join(SITE_ROOT, 'node_modules/bower/bin/bower')
+BOWER_PATH = subprocess.check_call("which bower")
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'static/bower_components')
 

@@ -7,6 +7,7 @@ services:
   - postgresql
   - memcached
 install:
+  - npm install -g bower
   - pip install -r reqs/travis.txt
 cache:
   directories:
