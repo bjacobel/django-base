@@ -8,6 +8,14 @@
   tags:
     - django
 
+- name: install bower
+  npm:
+    name: bower
+    state: present
+    global: yes
+  tags:
+    - django
+
 - name: Run the Django syncdb command
   django_manage:
     command: syncdb
