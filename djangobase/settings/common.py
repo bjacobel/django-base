@@ -187,7 +187,7 @@ BOWER_INSTALLED_APPS = (
     "zepto#1.1.4",
 )
 
-BOWER_PATH = subprocess.check_call("which bower")
+BOWER_PATH = subprocess.check_call("which bower", shell=True)
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'static/bower_components')
 
